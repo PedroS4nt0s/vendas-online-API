@@ -1,31 +1,29 @@
+import { UserEntity } from './interface/user.entity';
 import { createUserDTO } from './dtos/createUserDTO';
 import { Injectable } from '@nestjs/common';
-import { User } from './interface/user.interface';
+import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcrypt';
+import { Repository } from 'typeorm';
+
 
 @Injectable()
 export class UserService {
-    //criando usuarios "staticos" somente para esse service
-    private users: User[] = [];
+    //criando contrutor para ser possivel usar o repositorio no retorno dos serviços
+    constructor(
+        @InjectRepository(UserEntity)
+        private readonly userRepository: Repository<UserEntity>
+    ) {}
+    
 
     //criando usuario apartir das responses que o usuario informou
-    async createUser(createUserDTO : createUserDTO): Promise <User>{
+    async createUser(createUserDTO : createUserDTO): Promise <UserEntity>{
         const rounds = 10;
         const passwordHashed = await hash(createUserDTO.password, rounds);
-        console.log('passwordHashed', passwordHashed);
-
-        const user: User = {
-            ...createUserDTO, // Dessa forma é utilizado o modelo do createUserDTO sem sujeira ou alterações externas de outras classes "Modelo Novo"
-            id: this.users.length + 1,
-            password: passwordHashed,
-        };
-
-        this.users.push(user);
-
-    return user;
+    
+        return this.userRepository.save({...createUserDTO, password: passwordHashed});//setando com a senha incriptada por isso utilizando o save como obj
     }
 
-    async getAllUsers(): Promise <User[]>{
-        return this.users;
+    async getAllUsers(): Promise <UserEntity[]>{
+        return this.userRepository.find();
     }
 }
