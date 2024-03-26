@@ -18,8 +18,10 @@ fazendo a configuração de banco utilizando o arqv .env podendo criar varias ou
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       port: Number(process.env.DB_PORT), //é necessario fazer essa conversão pois é dado como retorno somente strings 
-      synchronize: true, //enquanto não utilizamos migrations
-      entities: [`${__dirname}/**/*.entity{.js,.ts}`]
+    //synchronize: true, //enquanto não utilizamos migrations
+      entities: [`${__dirname}/**/*.entity{.js,.ts}`],
+      migrations:[`${__dirname}/migration/{*.ts,*.js}`],
+      migrationsRun: true,
     }),
     UserModule
   ],

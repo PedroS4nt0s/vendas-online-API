@@ -20,7 +20,11 @@ export class UserService {
         const rounds = 10;
         const passwordHashed = await hash(createUserDTO.password, rounds);
     
-        return this.userRepository.save({...createUserDTO, password: passwordHashed});//setando com a senha incriptada por isso utilizando o save como obj
+        return this.userRepository.save({
+            ...createUserDTO, 
+            password: passwordHashed,
+            typeUser: 1
+        });//setando com a senha incriptada por isso utilizando o save como obj
     }
 
     async getAllUsers(): Promise <UserEntity[]>{
