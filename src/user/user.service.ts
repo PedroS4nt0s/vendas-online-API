@@ -1,9 +1,9 @@
-import { UserEntity } from './interface/user.entity';
 import { createUserDTO } from './dtos/createUserDTO';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcrypt';
 import { Repository } from 'typeorm';
+import { UserEntity } from './entities/user.entity';
 
 
 @Injectable()
