@@ -1,4 +1,4 @@
-import { createUserDTO } from './dtos/createUserDTO';
+import { createUserDTO } from './dtos/createUser.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcrypt';
