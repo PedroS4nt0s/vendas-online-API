@@ -6,9 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { StateModule } from './state/state.module';
 import { CityModule } from './city/city.module';
 import { CacheModule } from './cache/cache.module';
-
-
-
+import { AddressModule } from './address/address.module';
 
 /*conexao ao nest e postgres
 utilizando o type orm como interpretador para quando necessario o resultado de nossa pesquisa no banco retornar um obj
@@ -33,7 +31,8 @@ fazendo a configuração de banco utilizando o arqv .env podendo criar varias ou
     UserModule,
     StateModule,
     CityModule,
-    CacheModule
+    CacheModule,
+    AddressModule,
   ],
   controllers: [],
   providers: [CacheService],

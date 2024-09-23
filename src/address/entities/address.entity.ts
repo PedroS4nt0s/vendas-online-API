@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { UserEntity } from "src/user/entities/user.entity";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ name: 'address'})
 export class AddressEntity {
@@ -9,8 +10,8 @@ export class AddressEntity {
     @Column({name: 'user_id', nullable: false})
     userId: number;
 
-    @Column({name: 'complemento', nullable: true})
-    complemento: string;
+    @Column({name: 'complement', nullable: true})
+    complement: string;
 
     @Column({name: 'number', nullable: false})
     numberAddress: number;
@@ -26,4 +27,9 @@ export class AddressEntity {
 
     @UpdateDateColumn({name: 'updated_at'})
     UpdatedAt: Date;
+
+    @ManyToOne(() => UserEntity, (user) => user.addresses)
+    @JoinColumn({ name: 'user_id', referencedColumnName: 'id'})//referenciando qual a coluna dessa entity vai ser equivalente na outra entity
+    user?: UserEntity;
+
 }
