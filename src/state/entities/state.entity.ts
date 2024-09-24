@@ -1,19 +1,19 @@
 import { CityEntity } from "src/city/entities/city.entity";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity({ name: 'state'})
+@Entity({ name: 'state' })
 export class StateEntity {
 
     @PrimaryGeneratedColumn('rowid')
     id: number;
 
-    @Column({name: 'name', nullable: false})
+    @Column({ name: 'name', nullable: false })
     name: string;
 
-    @CreateDateColumn({name: 'created_at'})
+    @CreateDateColumn({ name: 'created_at' })
     createadAt: Date;
 
-    @UpdateDateColumn({name: 'updated_at'})
+    @UpdateDateColumn({ name: 'updated_at' })
     UpdatedAt: Date;
 
     @OneToMany(() => CityEntity, (city) => city.state)
